@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+        .calculator {
+            background-color: #e8e6e6;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        #result {
+            width: 95%;
+            height: 46px;
+            font-size: 22px;
+            text-align: right;
+            border: 2px solid #ccc;
+            border-radius: 5px;
+            padding: 5px;
+            margin-bottom: 10px;
+        }
+        button {
+            width: 60px;
+            height: 60px;
+            font-size: 20px;
+            margin: 5px;
+            border: none;
+            border-radius: 5px;
+            background-color: #72b1cc;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .operator {
+            background-color: #edbb58; 
+        }
+        .operator:hover {
+            background-color: #e68a00;
+        }
+        .clear {
+            background-color: #f76060; 
+        }
+        .clear:hover {
+            background-color: #e53935; 
+        }
+        .equal {
+            background-color: #88c761; 
+        }
+        .equal:hover {
+            background-color: #45a049; 
+        }
+    </style>
+    <script>
+        document.addEventListener('keydown', function(event) {
+            let key = event.key;
+
+            if (key >= '0' && key <= '9') {
+                sendInput(key);
+            } else if (key === '+') {
+                sendInput('+');
+            } else if (key === '-') {
+                sendInput('-');
+            } else if (key === '*') {
+                sendInput('*');
+            } else if (key === '/') {
+                sendInput('÷'); 
+            } else if (key === 'Enter') {
+                sendInput('=');
+            } else if (key === 'Backspace') {
+                sendInput('X'); 
+            } else if (key.toUpperCase() === 'C') {
+                sendInput('C'); 
+            }
+        });
+
+        function sendInput(action) {
+            const form = document.querySelector('form');
+            const input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = 'action';
+            input.value = action;
+            form.appendChild(input);
+            form.submit();
+        }
+    </script>
+</head>
+<body>
+    <div class="calculator">
+        <form method="post">
+            <input type="text" id="result" name="result" value="{{.Result}}" disabled>
+            <div>
+                <button type="submit" name="action" value="7">7</button>
+                <button type="submit" name="action" value="8">8</button>
+                <button type="submit" name="action" value="9">9</button>
+                <button type="submit" name="action" class="operator" value="÷">÷</button>
+            </div>
+            <div>
+                <button type="submit" name="action" value="4">4</button>
+                <button type="submit" name="action" value="5">5</button>
+                <button type="submit" name="action" value="6">6</button>
+                <button type="submit" class="operator" name="action" value="*">*</button>
+            </div>
+            <div>
+                <button type="submit" name="action" value="1">1</button>
+                <button type="submit" name="action" value="2">2</button>
+                <button type="submit" name="action" value="3">3</button>
+                <button type="submit" class="operator" name="action" value="-">-</button>
+            </div>
+            <div>
+                <button type="submit" name="action" value="0">0</button>
+                <button type="submit" name="action" value=".">.</button>
+                <button type="submit" class="equal" name="action" value="=">=</button>
+                <button type="submit" class="operator" name="action" value="+">+</button>
+            </div>
+            <div style="display: flex; justify-content: space-between;">
+                <button type="submit" class="clear" name="action" value="C" style="width: 46%;">C</button>
+                <button type="submit" class="clear" name="action" value="X" style="width: 46%;">X</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
